@@ -1,59 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Macronutrient Calculator</title>
-  </head>
-  <body>
-    <h1>Macronutrient Calculator</h1>
-    <form>
-      <h2>Calculate Macronutrients for a Single Meal</h2>
-      <label for="food">Food:</label>
-      <input type="text" id="food" name="food" required><br><br>
+<html>
+<head>
+	<title>My Food Journal</title>
+	<style>
+		label {
+			display: inline-block;
+			width: 150px;
+			text-align: right;
+			margin-right: 10px;
+		}
+		input[type=text] {
+			width: 200px;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+		h1 {
+			text-align: center;
+		}
+		table {
+			border-collapse: collapse;
+			margin: auto;
+			width: 100%;
+		}
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+		.total {
+			font-weight: bold;
+		}
+		.weekly {
+			float: right;
+			margin-bottom: 10px;
+		}
+		.weekly select {
+			padding: 5px;
+			margin-left: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>My Food Journal</h1>
+	<form id="food-form">
+		<label for="food-name">Food Name:</label>
+		<input type="text" id="food-name" name="food-name" required><br>
+		<label for="protein">Protein:</label>
+		<input type="text" id="protein" name="protein" required><br>
+		<label for="carbs">Carbs:</label>
+		<input type="text" id="carbs" name="carbs" required><br>
+		<label for="fat">Fat:</label>
+		<input type="text" id="fat" name="fat" required><br>
+		<label for="calories">Calories:</label>
+		<input type="text" id="calories" name="calories" required><br>
+		<input type="submit" value="Add Food">
+	</form>
+	<div class="weekly">
+		<label for="week-select">Weekly Plan:</label>
+		<select id="week-select">
+			<option value="1">Week 1</option>
+			<option value="2">Week 2</option>
+			<option value="3">Week 3</option>
+			<option value="4">Week 4</option>
+		</select>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>Food Name</th>
+				<th>Protein</th>
+				<th>Carbs</th>
+				<th>Fat</th>
+				<th>Calories</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="total">Total:</td>
+				<td class="total" id="total-protein">0</td>
+				<td class="total" id="total-carbs">0</td>
+				<td class="total" id="total-fat">0</td
+// Define global variables
+var foodItems = [];
+var weeklyPlan = {
+  "Monday": [],
+  "Tuesday": [],
+  "Wednesday": [],
+  "Thursday": [],
+  "Friday": [],
+  "Saturday": [],
+  "Sunday": []
+};
 
-      <label for="protein">Protein (g):</label>
-      <input type="number" id="protein" name="protein" min="0" required><br><br>
+// Function to add a food item to the list
+function addFood() {
+  var foodName = document.getElementById("food-name").value;
+  var protein = parseInt(document.getElementById("protein").value);
+  var carbs = parseInt(document.getElementById("carbs").value);
+  var fat = parseInt(document.getElementById("fat").value);
 
-      <label for="carbs">Carbs (g):</label>
-      <input type="number" id="carbs" name="carbs" min="0" required><br><br>
+  var newFood = {
+    "name": foodName,
+    "protein": protein,
+    "carbs": carbs,
+    "fat": fat
+  };
 
-      <label for="fat">Fat (g):</label>
-      <input type="number" id="fat" name="fat" min="0" required><br><br>
+  foodItems.push(newFood);
+  updateFoodList();
+}
 
-      <input type="button" value="Calculate" onclick="calculateMacros()"><br><br>
+// Function to update the food list
+function updateFoodList() {
+  var foodList = document.getElementById("food-list");
+  foodList.innerHTML = "";
 
-      <label for="calories">Calories:</label>
-      <input type="text" id="calories" name="calories" readonly><br><br>
+  for (var i = 0; i < foodItems.length; i++) {
+    var listItem = document.createElement("li");
+    var foodName = document.createTextNode(foodItems[i].name);
+    var protein = document.createTextNode(foodItems[i].protein + "g protein, ");
+    var carbs = document.createTextNode(foodItems[i].carbs + "g carbs, ");
+    var fat = document.createTextNode(foodItems[i].fat + "g fat");
 
-      <label for="percentProtein">Percent Protein:</label>
-      <input type="text" id="percentProtein" name="percentProtein" readonly><br><br>
+    listItem.appendChild(foodName);
+    listItem.appendChild(protein);
+    listItem.appendChild(carbs);
+    listItem.appendChild(fat);
+    foodList.appendChild(listItem);
+  }
+}
 
-      <label for="percentCarbs">Percent Carbs:</label>
-      <input type="text" id="percentCarbs" name="percentCarbs" readonly><br><br>
+// Function to add a food item to the weekly plan
+function addToPlan() {
+  var day = document.getElementById("day").value;
+  var foodIndex = parseInt(document.getElementById("food-index").value);
 
-      <label for="percentFat">Percent Fat:</label>
-      <input type="text" id="percentFat" name="percentFat" readonly><br><br>
+  var food = foodItems[foodIndex];
+  weeklyPlan[day].push(food);
+  updateWeeklyPlan();
+}
 
-      <h2>Create a Weekly Meal Plan</h2>
-      <table>
-        <tr>
-          <th>Meal</th>
-          <th>Food</th>
-          <th>Protein (g)</th>
-          <th>Carbs (g)</th>
-          <th>Fat (g)</th>
-          <th>Calories</th>
-        </tr>
-        <tr>
-          <td><label for="meal1">Meal 1:</label></td>
-          <td><input type="text" id="meal1Food" name="meal1Food" required></td>
-          <td><input type="number" id="meal1Protein" name="meal1Protein" min="0" required></td>
-          <td><input type="number" id="meal1Carbs" name="meal1Carbs" min="0" required></td>
-          <td><input type="number" id="meal1Fat" name="meal1Fat" min="0" required></td>
-          <td><input type="text" id="meal1Calories" name="meal1Calories" readonly></td>
-        </tr>
-        <tr>
-          <td><label for="meal2">Meal 2:</label></td>
-          <td><input type="text" id="meal2Food" name="meal2Food" required></td>
-          <td><input type="number" id="meal2Protein" name="meal2Protein" min="0" required></td>
-          <td><input type="number" id
+// Function to update the weekly plan
+function updateWeeklyPlan() {
+  var weeklyPlanTable = document.getElementById("weekly-plan");
+  weeklyPlanTable.innerHTML = "";
+
+  for (var day in weeklyPlan) {
+    var tableRow = document.createElement("tr");
+    var dayHeader = document.createElement("th");
+    var dayHeaderText = document.createTextNode(day);
+
+    dayHeader.appendChild(dayHeaderText);
+    tableRow.appendChild(dayHeader);
+
+    for (var i = 0; i < weeklyPlan[day].length; i++) {
+      var foodName = document.createTextNode(weeklyPlan[day][i].name);
+      var protein = document.createTextNode(weeklyPlan[day][i].protein + "g protein, ");
+      var carbs = document.createTextNode(weeklyPlan[day][i].carbs + "g carbs, ");
+      var fat = document.createTextNode(weeklyPlan[day][i].fat + "g fat");
+      var tableData = document.createElement("td");
+
+      tableData.appendChild(foodName);
+      tableData.appendChild(protein);
+      tableData.appendChild(carbs);
+      tableData.appendChild(fat);
+      tableRow.appendChild(tableData);
+    }
+
+    weeklyPlanTable.appendChild(tableRow);
+  }
+}
