@@ -6,47 +6,48 @@
   </head>
   <body>
     <h1>Macronutrient Calculator</h1>
+    <h2>Weekly Food Plan</h2>
     <form>
-      <label for="food">Food:</label>
-      <input type="text" id="food" name="food" required><br><br>
-
-      <label for="protein">Protein (g):</label>
-      <input type="number" id="protein" name="protein" min="0" required><br><br>
-
-      <label for="carbs">Carbs (g):</label>
-      <input type="number" id="carbs" name="carbs" min="0" required><br><br>
-
-      <label for="fat">Fat (g):</label>
-      <input type="number" id="fat" name="fat" min="0" required><br><br>
-
-      <input type="button" value="Calculate" onclick="calculateMacros()"><br><br>
-
-      <label for="calories">Calories:</label>
-      <input type="text" id="calories" name="calories" readonly><br><br>
-
-      <label for="percentProtein">Percent Protein:</label>
-      <input type="text" id="percentProtein" name="percentProtein" readonly><br><br>
-
-      <label for="percentCarbs">Percent Carbs:</label>
-      <input type="text" id="percentCarbs" name="percentCarbs" readonly><br><br>
-
-      <label for="percentFat">Percent Fat:</label>
-      <input type="text" id="percentFat" name="percentFat" readonly><br><br>
-    </form>
-
-    <script>
-      function calculateMacros() {
-        var protein = parseInt(document.getElementById("protein").value);
-        var carbs = parseInt(document.getElementById("carbs").value);
-        var fat = parseInt(document.getElementById("fat").value);
-
-        var calories = (protein * 4) + (carbs * 4) + (fat * 9);
-
-        document.getElementById("calories").value = calories;
-        document.getElementById("percentProtein").value = ((protein * 4) / calories * 100).toFixed(2) + "%";
-        document.getElementById("percentCarbs").value = ((carbs * 4) / calories * 100).toFixed(2) + "%";
-        document.getElementById("percentFat").value = ((fat * 9) / calories * 100).toFixed(2) + "%";
-      }
-    </script>
-  </body>
-</html>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+            <th>Snacks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monday</td>
+            <td><input type="text" id="monBreakfast" name="monBreakfast"></td>
+            <td><input type="text" id="monLunch" name="monLunch"></td>
+            <td><input type="text" id="monDinner" name="monDinner"></td>
+            <td><input type="text" id="monSnacks" name="monSnacks"></td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td><input type="text" id="tuesBreakfast" name="tuesBreakfast"></td>
+            <td><input type="text" id="tuesLunch" name="tuesLunch"></td>
+            <td><input type="text" id="tuesDinner" name="tuesDinner"></td>
+            <td><input type="text" id="tuesSnacks" name="tuesSnacks"></td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td><input type="text" id="wedBreakfast" name="wedBreakfast"></td>
+            <td><input type="text" id="wedLunch" name="wedLunch"></td>
+            <td><input type="text" id="wedDinner" name="wedDinner"></td>
+            <td><input type="text" id="wedSnacks" name="wedSnacks"></td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td><input type="text" id="thursBreakfast" name="thursBreakfast"></td>
+            <td><input type="text" id="thursLunch" name="thursLunch"></td>
+            <td><input type="text" id="thursDinner" name="thursDinner"></td>
+            <td><input type="text" id="thursSnacks" name="thursSnacks"></td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td><input type="text" id="friBreakfast" name="friBreakfast"></td>
+            <td><input type="text" id="friLunch" name="fri
