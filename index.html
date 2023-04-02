@@ -6,48 +6,54 @@
   </head>
   <body>
     <h1>Macronutrient Calculator</h1>
-    <h2>Weekly Food Plan</h2>
     <form>
+      <h2>Calculate Macronutrients for a Single Meal</h2>
+      <label for="food">Food:</label>
+      <input type="text" id="food" name="food" required><br><br>
+
+      <label for="protein">Protein (g):</label>
+      <input type="number" id="protein" name="protein" min="0" required><br><br>
+
+      <label for="carbs">Carbs (g):</label>
+      <input type="number" id="carbs" name="carbs" min="0" required><br><br>
+
+      <label for="fat">Fat (g):</label>
+      <input type="number" id="fat" name="fat" min="0" required><br><br>
+
+      <input type="button" value="Calculate" onclick="calculateMacros()"><br><br>
+
+      <label for="calories">Calories:</label>
+      <input type="text" id="calories" name="calories" readonly><br><br>
+
+      <label for="percentProtein">Percent Protein:</label>
+      <input type="text" id="percentProtein" name="percentProtein" readonly><br><br>
+
+      <label for="percentCarbs">Percent Carbs:</label>
+      <input type="text" id="percentCarbs" name="percentCarbs" readonly><br><br>
+
+      <label for="percentFat">Percent Fat:</label>
+      <input type="text" id="percentFat" name="percentFat" readonly><br><br>
+
+      <h2>Create a Weekly Meal Plan</h2>
       <table>
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>Breakfast</th>
-            <th>Lunch</th>
-            <th>Dinner</th>
-            <th>Snacks</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Monday</td>
-            <td><input type="text" id="monBreakfast" name="monBreakfast"></td>
-            <td><input type="text" id="monLunch" name="monLunch"></td>
-            <td><input type="text" id="monDinner" name="monDinner"></td>
-            <td><input type="text" id="monSnacks" name="monSnacks"></td>
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td><input type="text" id="tuesBreakfast" name="tuesBreakfast"></td>
-            <td><input type="text" id="tuesLunch" name="tuesLunch"></td>
-            <td><input type="text" id="tuesDinner" name="tuesDinner"></td>
-            <td><input type="text" id="tuesSnacks" name="tuesSnacks"></td>
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td><input type="text" id="wedBreakfast" name="wedBreakfast"></td>
-            <td><input type="text" id="wedLunch" name="wedLunch"></td>
-            <td><input type="text" id="wedDinner" name="wedDinner"></td>
-            <td><input type="text" id="wedSnacks" name="wedSnacks"></td>
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td><input type="text" id="thursBreakfast" name="thursBreakfast"></td>
-            <td><input type="text" id="thursLunch" name="thursLunch"></td>
-            <td><input type="text" id="thursDinner" name="thursDinner"></td>
-            <td><input type="text" id="thursSnacks" name="thursSnacks"></td>
-          </tr>
-          <tr>
-            <td>Friday</td>
-            <td><input type="text" id="friBreakfast" name="friBreakfast"></td>
-            <td><input type="text" id="friLunch" name="fri
+        <tr>
+          <th>Meal</th>
+          <th>Food</th>
+          <th>Protein (g)</th>
+          <th>Carbs (g)</th>
+          <th>Fat (g)</th>
+          <th>Calories</th>
+        </tr>
+        <tr>
+          <td><label for="meal1">Meal 1:</label></td>
+          <td><input type="text" id="meal1Food" name="meal1Food" required></td>
+          <td><input type="number" id="meal1Protein" name="meal1Protein" min="0" required></td>
+          <td><input type="number" id="meal1Carbs" name="meal1Carbs" min="0" required></td>
+          <td><input type="number" id="meal1Fat" name="meal1Fat" min="0" required></td>
+          <td><input type="text" id="meal1Calories" name="meal1Calories" readonly></td>
+        </tr>
+        <tr>
+          <td><label for="meal2">Meal 2:</label></td>
+          <td><input type="text" id="meal2Food" name="meal2Food" required></td>
+          <td><input type="number" id="meal2Protein" name="meal2Protein" min="0" required></td>
+          <td><input type="number" id
